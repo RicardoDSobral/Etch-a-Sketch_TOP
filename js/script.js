@@ -24,4 +24,17 @@ function createGrid(size) {
     }
 }
 
+function draw(){
+    let lines = document.querySelectorAll('#line');
+    lines.forEach((line) =>{line.addEventListener('mouseover',() => paint(line))} )
+}
+function paint(line){
+    line.classList.add('hovered');
+}
+// Creates a nodelist to reference the grid divs
+// Adds eventlisteners to mouseover
+    // Adds the class hovered to the grid
+
+
 createGrid(size);
+draw();
