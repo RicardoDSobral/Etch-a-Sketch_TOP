@@ -46,10 +46,6 @@ footer {
     border: 1px solid black;
 }
 
-.hovered {
-    background-color: black;
-}
-
 .controls-panel {
     display: flex;
     flex-direction: column;
