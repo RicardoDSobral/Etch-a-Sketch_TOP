@@ -3,6 +3,8 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0;
+    background-color: black;
+    color: whitesmoke;
 }
 
 header {
@@ -29,7 +31,7 @@ footer {
 .grid-container {
     width: 600px;
     height: 600px;
-    outline: black solid 2px;
+    outline: whitesmoke solid 2px;
     display: flex;
 }
 
@@ -42,4 +44,5 @@ footer {
 
 .line {
     flex: 1;
+    background-color: whitesmoke;
 }
