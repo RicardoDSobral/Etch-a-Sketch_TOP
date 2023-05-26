@@ -1,13 +1,22 @@
-let size = 16;
+const DEFAULT_SIZE = 16;
+const DEFAULT_MODE = 'draw';
+
+let size = DEFAULT_SIZE;
+let mode = DEFAULT_MODE;
+
+const drawButton = document.getElementById('draw');
 const reset = document.getElementById('reset-button');
+const eraser = document.getElementById('eraser');
 const gridSizeButton = document.getElementById('grid-size-button');
 
-reset.addEventListener('click', () => resetGrid());
+drawButton.addEventListener('click', () => draw())
 gridSizeButton.addEventListener('click', () => promptForGridSize())
+eraser.addEventListener('click', () => erase())
+reset.addEventListener('click', () => resetGrid());
 
 function createGrid(size) {
     // Get reference to the grid container
-    let gridContainer = document.querySelector('#grid-container');
+    let gridContainer = document.getElementById('grid-container');
 
     // For loop to create n columns
     for (let i = 0; i < size; i++){
@@ -29,17 +38,34 @@ function createGrid(size) {
     }
 }
 
-function draw(){
+function paint(){
     let lines = document.querySelectorAll('#line');
-    lines.forEach((line) =>line.addEventListener('mouseover',() => paint(line)))
+    lines.forEach((line) =>line.addEventListener('mouseover',() => paintMode(line, mode)))
 }
-function paint(line){
-    line.classList.add('hovered');
+function paintMode(line, mode){
+    switch (mode){
+        case 'draw':
+            line.style.backgroundColor = 'black';
+            break
+        case 'erase':
+            line.style.backgroundColor = 'white';
+            break;
+        }
+}
+
+function draw(){
+    mode = 'draw';
+    paint();
+}
+
+function erase(){
+    mode = 'erase';
+    paint();
 }
 
 function resetGrid(){
     let lines = document.querySelectorAll('#line');
-    lines.forEach((line) => line.classList.remove('hovered'));
+    lines.forEach((line) => line.style.backgroundColor = 'white');
 }
 
 function promptForGridSize(){
@@ -53,8 +79,8 @@ function promptForGridSize(){
         }
     }
     createGrid(size);
-    draw();
+    paint();
 }
 
 createGrid(size);
-draw();
+paint();
