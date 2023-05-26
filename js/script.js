@@ -1,4 +1,9 @@
-let size = 32;
+let size = 16;
+const reset = document.getElementById('reset-button');
+const gridSizeButton = document.getElementById('grid-size-button');
+
+reset.addEventListener('click', () => resetGrid());
+gridSizeButton.addEventListener('click', () => promptForGridSize())
 
 function createGrid(size) {
     // Get reference to the grid container
@@ -26,15 +31,30 @@ function createGrid(size) {
 
 function draw(){
     let lines = document.querySelectorAll('#line');
-    lines.forEach((line) =>{line.addEventListener('mouseover',() => paint(line))} )
+    lines.forEach((line) =>line.addEventListener('mouseover',() => paint(line)))
 }
 function paint(line){
     line.classList.add('hovered');
 }
-// Creates a nodelist to reference the grid divs
-// Adds eventlisteners to mouseover
-    // Adds the class hovered to the grid
 
+function resetGrid(){
+    let lines = document.querySelectorAll('#line');
+    lines.forEach((line) => line.classList.remove('hovered'));
+}
+
+function promptForGridSize(){
+    // Remove lines
+    const oldCols = document.querySelectorAll('#column');
+    oldCols.forEach((col) => col.remove());
+    while (true){
+        size = parseInt(prompt('Enter grid size'));
+        if (!isNaN(size) && size <= 100 && size > 0){
+            break;
+        }
+    }
+    createGrid(size);
+    draw();
+}
 
 createGrid(size);
 draw();
